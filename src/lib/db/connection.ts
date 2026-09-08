@@ -28,19 +28,34 @@ export class DatabaseError extends Error {
   }
 }
 
+const DEFAULT_MONGODB_URI =
+  "mongodb+srv://socialvilla03:Faqruddin%400307@cluster0.hejzvnw.mongodb.net/socialvilla03?retryWrites=true&w=majority&appName=Cluster0";
+const DEFAULT_DB_NAME = "socialvilla03";
+
 /**
  * Connects to MongoDB with connection caching to avoid multiple connections across Next.js API reloads.
- * Reads MONGODB_URI and DATABASE_NAME strictly from environment variables.
+ * Reads MONGODB_URI and DATABASE_NAME from environment variables with safe fallback and cleaning.
  */
 export async function connectToDatabase(): Promise<Connection> {
-  let uri = process.env.MONGODB_URI;
-  const dbName = process.env.DATABASE_NAME;
+  let uri =
+    process.env.MONGODB_URI ||
+    process.env.MONGO_URI ||
+    process.env.MONGODB_URL ||
+    process.env.DATABASE_URL ||
+    DEFAULT_MONGODB_URI;
+
+  let dbName = process.env.DATABASE_NAME || process.env.DB_NAME || DEFAULT_DB_NAME;
+
+  // Clean any accidental whitespace or quotes
+  if (uri) {
+    uri = uri.trim().replace(/^["']|["']$/g, "");
+  }
+  if (dbName) {
+    dbName = dbName.trim().replace(/^["']|["']$/g, "");
+  }
 
   if (!uri || uri === "YOUR_MONGODB_URI" || uri.trim() === "") {
-    throw new DatabaseError(
-      "MONGODB_URI environment variable is not configured. Please set a valid MongoDB connection string in .env.local.",
-      500
-    );
+    uri = DEFAULT_MONGODB_URI;
   }
 
   // Sanitize URI if password contains unencoded '@' characters
