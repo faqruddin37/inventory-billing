@@ -357,7 +357,7 @@ export default function BillingPage() {
           <div className="space-y-3">
             <div className="flex items-center justify-between text-xs text-slate-500 font-sans px-1">
               <span>Spare Parts Available ({products.length})</span>
-              <span className="text-[11px]">Click item or "+" to add to invoice</span>
+              <span className="text-[11px]">Click item or &quot;+&quot; to add to invoice</span>
             </div>
 
             {isLoadingProducts ? (

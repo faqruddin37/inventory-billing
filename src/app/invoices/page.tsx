@@ -148,7 +148,7 @@ export default function InvoicesPage() {
               className="w-full h-10 bg-white border border-slate-200 text-slate-900 text-xs rounded-lg px-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 shadow-sm"
             >
               <option value="all">All Dates</option>
-              <option value="today">Today's Invoices</option>
+              <option value="today">Today&apos;s Invoices</option>
               <option value="week">Past 7 Days</option>
               <option value="month">Past 30 Days</option>
               <option value="custom">Custom Date Range</option>

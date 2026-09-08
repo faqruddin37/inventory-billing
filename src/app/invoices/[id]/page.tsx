@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, useCallback, use } from "react";
 import Link from "next/link";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Card, CardContent } from "@/components/ui/Card";
@@ -22,7 +22,7 @@ export default function InvoiceViewPage({ params }: InvoiceViewPageProps) {
   const [error, setError] = useState<string | null>(null);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
-  const fetchInvoice = async () => {
+  const fetchInvoice = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await fetch(`/api/invoices/${id}`);
@@ -37,11 +37,11 @@ export default function InvoiceViewPage({ params }: InvoiceViewPageProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchInvoice();
-  }, [id]);
+  }, [fetchInvoice]);
 
   const handlePrint = () => {
     window.print();

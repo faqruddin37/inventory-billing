@@ -88,12 +88,12 @@ export default function DashboardPage() {
       {/* 8 Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Today's Sales */}
-        <Card glowOnHover className="relative overflow-hidden">
+        <Card glowOnHover className="relative overflow-hidden border-t-4 border-t-blue-500">
           <div className="absolute top-0 right-0 p-3 text-blue-500/20">
             <IndianRupee className="w-7 h-7" />
           </div>
           <p className="text-xs font-semibold text-slate-500 font-heading uppercase tracking-wider">
-            Today's Sales
+            Today&apos;s Sales
           </p>
           <h3 className="text-2xl font-bold font-heading text-slate-900 mt-1">
             {isLoading ? "..." : formatINR(metrics.todaySales)}
@@ -106,12 +106,12 @@ export default function DashboardPage() {
         </Card>
 
         {/* Card 2: This Month's Sales */}
-        <Card glowOnHover className="relative overflow-hidden">
+        <Card glowOnHover className="relative overflow-hidden border-t-4 border-t-emerald-500">
           <div className="absolute top-0 right-0 p-3 text-emerald-500/20">
             <TrendingUp className="w-7 h-7" />
           </div>
           <p className="text-xs font-semibold text-slate-500 font-heading uppercase tracking-wider">
-            This Month's Sales
+            This Month&apos;s Sales
           </p>
           <h3 className="text-2xl font-bold font-heading text-emerald-600 mt-1">
             {isLoading ? "..." : formatINR(metrics.thisMonthSales)}

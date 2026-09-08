@@ -70,6 +70,7 @@ export function InvoicePrintSheet({ invoice }: InvoicePrintSheetProps) {
       <div className="flex justify-between items-start pb-4 border-b-2 border-slate-800">
         <div className="flex gap-3 items-center">
           {shop.logoUrl ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={shop.logoUrl}
               alt={shop.shopName}

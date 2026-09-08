@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Dialog } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
@@ -33,7 +33,7 @@ export function CategoryManagerDialog({
   const [newCategoryDesc, setNewCategoryDesc] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await fetch("/api/categories?status=all");
@@ -46,13 +46,13 @@ export function CategoryManagerDialog({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [showError]);
 
   useEffect(() => {
     if (isOpen) {
       fetchCategories();
     }
-  }, [isOpen]);
+  }, [isOpen, fetchCategories]);
 
   const handleCreateCategory = async (e: React.FormEvent) => {
     e.preventDefault();
